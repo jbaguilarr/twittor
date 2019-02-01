@@ -54,6 +54,9 @@
 
 self.addEventListener('fetch',e=>{
      const respuesta = caches.match(e.request).then(res=>{
+            if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin') {
+                return;
+            }
            if(res){
                return res;
            }else{
